@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  hycoind The hycoin core server.
+#
+#
+# chkconfig: 345 80 20
+# description: hycoind
+# processname: hycoind
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/hycoind, see below
+if [ -f /etc/sysconfig/hycoind ]; then
+        . /etc/sysconfig/hycoind
+fi
+
+RETVAL=0
+
+prog=hycoind
+# you can override the lockfile via HYCOIND_LOCKFILE in /etc/sysconfig/hycoind
+lockfile=${HYCOIND_LOCKFILE-/var/lock/subsys/hycoind}
+
+# hycoind defaults to /usr/bin/hycoind, override with HYCOIND_BIN
+hycoind=${HYCOIND_BIN-/usr/bin/hycoind}
+
+# hycoind opts default to -disablewallet, override with HYCOIND_OPTS
+hycoind_opts=${HYCOIND_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $hycoind $hycoind_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

@@ -1,0 +1,45 @@
+bin_PROGRAMS += bench/bench_hycoin
+BENCH_SRCDIR = bench
+BENCH_BINARY = bench/bench_hycoin$(EXEEXT)
+
+
+bench_bench_hycoin_SOURCES = \
+  bench/bench_hycoin.cpp \
+  bench/bench.cpp \
+  bench/bench.h \
+  bench/Examples.cpp
+
+bench_bench_hycoin_CPPFLAGS = $(AM_CPPFLAGS) $(HYCOIN_INCLUDES) $(EVENT_CLFAGS) $(EVENT_PTHREADS_CFLAGS) -I$(builddir)/bench/
+bench_bench_hycoin_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bench_bench_hycoin_LDADD = \
+  $(LIBHYCOIN_SERVER) \
+  $(LIBHYCOIN_COMMON) \
+  $(LIBHYCOIN_UNIVALUE) \
+  $(LIBHYCOIN_UTIL) \
+  $(LIBHYCOIN_CRYPTO) \
+  $(LIBLEVELDB) \
+  $(LIBMEMENV) \
+  $(LIBSECP256K1)
+
+if ENABLE_ZMQ
+bench_bench_hycoin_LDADD += $(LIBHYCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+
+if ENABLE_WALLET
+bench_bench_hycoin_LDADD += $(LIBHYCOIN_WALLET)
+endif
+
+bench_bench_hycoin_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+bench_bench_hycoin_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+
+CLEAN_HYCOIN_BENCH = bench/*.gcda bench/*.gcno
+
+CLEANFILES += $(CLEAN_HYCOIN_BENCH)
+
+hycoin_bench: $(BENCH_BINARY)
+
+bench: $(BENCH_BINARY) FORCE
+	$(BENCH_BINARY)
+
+hycoin_bench_clean : FORCE
+	rm -f $(CLEAN_HYCOIN_BENCH) $(bench_bench_hycoin_OBJECTS) $(BENCH_BINARY)

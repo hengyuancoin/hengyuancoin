@@ -1,0 +1,33 @@
+# /etc/conf.d/hycoind: config file for /etc/init.d/hycoind
+
+# Config file location
+#HYCOIND_CONFIGFILE="/etc/hycoin/hycoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $HYCOIND_USER)
+#HYCOIND_PIDDIR="/var/run/hycoind"
+
+# What filename to give the pidfile
+#HYCOIND_PIDFILE="${HYCOIND_PIDDIR}/hycoind.pid"
+
+# Where to write hycoind data (be mindful that the blockchain is large)
+#HYCOIND_DATADIR="/var/lib/hycoind"
+
+# User and group to own hycoind process
+#HYCOIND_USER="hycoin"
+#HYCOIND_GROUP="hycoin"
+
+# Path to hycoind executable
+#HYCOIND_BIN="/usr/bin/hycoind"
+
+# Nice value to run hycoind under
+#HYCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+HYCOIND_OPTS="-disablewallet"
+
+# The timeout in seconds OpenRC will wait for hycoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+HYCOIND_SIGTERM_TIMEOUT=60

@@ -1,0 +1,1 @@
+qt/qt_libhycoinqt_a-qrc_hycoin.o: qt/qrc_hycoin.cpp

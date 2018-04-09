@@ -1,0 +1,1 @@
+qt/qt_libhycoinqt_a-qrc_hycoin_locale.o: qt/qrc_hycoin_locale.cpp

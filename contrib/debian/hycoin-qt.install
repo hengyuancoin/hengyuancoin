@@ -1,0 +1,6 @@
+usr/local/bin/hycoin-qt usr/bin
+share/pixmaps/hycoin32.xpm usr/share/pixmaps
+share/pixmaps/hycoin16.xpm usr/share/pixmaps
+share/pixmaps/hycoin128.png usr/share/pixmaps
+debian/hycoin-qt.desktop usr/share/applications
+debian/hycoin-qt.protocol usr/share/kde4/services/

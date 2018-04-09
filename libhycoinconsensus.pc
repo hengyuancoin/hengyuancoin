@@ -1,0 +1,11 @@
+prefix=/home/caoliang/hyc/depends/x86_64-w64-mingw32
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Hycoin Core consensus library
+Description: Library for the Hycoin consensus protocol.
+Version: 0.12.1
+Libs: -L${libdir} -lhycoinconsensus
+Cflags: -I${includedir}
+Requires.private: libcrypto

@@ -1,0 +1,3 @@
+debian/manpages/hycoind.1
+debian/manpages/hycoin.conf.5
+debian/manpages/hycoin-cli.1

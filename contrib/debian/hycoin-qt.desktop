@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Hycoin
+Comment=Hycoin P2P Cryptocurrency
+Comment[fr]=Hycoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Hycoin, eşten eşe kriptografik sanal para birimi
+Exec=hycoin-qt %u
+Terminal=false
+Type=Application
+Icon=hycoin128
+MimeType=x-scheme-handler/hycoin;
+Categories=Office;Finance;
